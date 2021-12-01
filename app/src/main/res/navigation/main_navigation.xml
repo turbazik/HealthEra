@@ -28,6 +28,12 @@
             android:id="@+id/from_adherence_to_detail"
             app:destination="@+id/adherenceDetail" />
 
+        <action
+            android:id="@+id/from_adherence_to_auth"
+            app:destination="@+id/auth"
+            app:popUpTo="@id/adherence"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
     <dialog

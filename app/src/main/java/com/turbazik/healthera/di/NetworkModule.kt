@@ -18,7 +18,6 @@ private const val NETWORK_TIMEOUT_IN_SECONDS = 30L
 private const val BASE_URL = "https://api.dev-healthera.co.uk/"
 private const val CLIENT_ID_KEY = "client-id"
 private const val TOKEN_KEY = "Token"
-private const val TOKEN_REQUEST_URL = "token"
 
 val networkModule = module {
     single {
@@ -38,7 +37,7 @@ fun provideInterceptor(userStorage: UserStorage): Interceptor {
     return Interceptor { chain ->
         val builder = chain.request().newBuilder()
         builder.addHeader(CLIENT_ID_KEY, userStorage.clientId)
-        if (!chain.request().url.toString().contains(TOKEN_REQUEST_URL))
+        if (userStorage.token.isNotEmpty())
             builder.addHeader(TOKEN_KEY, userStorage.token)
         chain.proceed(builder.build())
     }

@@ -15,6 +15,7 @@ val viewModelModule = module {
     viewModel {
         AdherenceViewModel(
             patientsUseCase = get(),
+            authUseCase = get(),
             adherenceDvoMapper = AdherenceDvoMapper()
         )
     }

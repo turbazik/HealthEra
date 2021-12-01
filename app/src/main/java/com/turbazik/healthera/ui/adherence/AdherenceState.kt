@@ -6,6 +6,7 @@ sealed class AdherenceState {
     object Default : AdherenceState()
     object StartLoading : AdherenceState()
     object EndLoading : AdherenceState()
+    object LogoutRequestSucceeded : AdherenceState()
     class RequestFailed(val message: String) : AdherenceState()
-    class RequestSucceeded(val data: List<AdherenceDvo>) : AdherenceState()
+    class AdherenceRequestSucceeded(val data: List<AdherenceDvo>) : AdherenceState()
 }

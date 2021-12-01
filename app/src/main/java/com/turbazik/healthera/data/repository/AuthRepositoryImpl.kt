@@ -25,6 +25,16 @@ class AuthRepositoryImpl(
         saveUserData(response)
     }
 
+    override suspend fun logout() {
+        val response = request {
+            api.logout()
+        }
+        if (response.error != null) {
+            throw Exception(response.error.text)
+        }
+        userStorage.clear()
+    }
+
     private fun saveUserData(response: LoginDto) {
         userStorage.token = response.data?.first()?.token.orEmpty()
         userStorage.userId = response.aux?.tokenPayload?.userId.orEmpty()

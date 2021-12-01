@@ -8,4 +8,5 @@
     <string name="auth_email_validation">Email is empty!</string>
     <string name="adherence_description">%s, %d Tablets.</string>
     <string name="type_your_notes_here">Type your notes here</string>
+    <string name="log_out">Log out</string>
 </resources>

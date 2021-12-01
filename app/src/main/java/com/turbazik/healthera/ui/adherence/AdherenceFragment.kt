@@ -2,6 +2,9 @@ package com.turbazik.healthera.ui.adherence
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -25,6 +28,12 @@ class AdherenceFragment : Fragment(R.layout.fragment_adherence) {
     private val viewModel: AdherenceViewModel by viewModel()
     private val adapter = AdherenceAdapter()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAdherenceBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,6 +44,24 @@ class AdherenceFragment : Fragment(R.layout.fragment_adherence) {
         initViews()
         initListeners()
         initStateObserving()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                viewModel.onLogout()
+                return true
+            }
+            else -> {
+                // no-op
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initViews() {
@@ -71,13 +98,18 @@ class AdherenceFragment : Fragment(R.layout.fragment_adherence) {
                         is AdherenceState.RequestFailed -> {
                             showToast(message = viewState.message)
                         }
-                        is AdherenceState.RequestSucceeded -> {
+                        is AdherenceState.AdherenceRequestSucceeded -> {
                             adapter.setItems(
                                 viewState.data
                             )
                         }
                         is AdherenceState.StartLoading -> {
                             binding.progress.isVisible = true
+                        }
+                        is AdherenceState.LogoutRequestSucceeded -> {
+                            findNavController().navigate(
+                                AdherenceFragmentDirections.fromAdherenceToAuth()
+                            )
                         }
                     }
                 }
