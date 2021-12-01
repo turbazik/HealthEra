@@ -4,6 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.turbazik.healthera.BuildConfig
 import com.turbazik.healthera.data.api.AuthAPI
+import com.turbazik.healthera.data.api.PatientsAPI
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val NETWORK_TIMEOUT_IN_SECONDS = 30L
-private const val BASE_URL = "https://api.84r.co/"
+private const val BASE_URL = "https://api.dev-healthera.co.uk/"
 
 val networkModule = module {
     single { provideInterceptor() }
@@ -22,6 +23,7 @@ val networkModule = module {
     single { GsonConverterFactory.create(get()) }
     single { provideRetrofit(get(), get()) }
     single { get<Retrofit>().create(AuthAPI::class.java) }
+    single { get<Retrofit>().create(PatientsAPI::class.java) }
 }
 
 fun provideInterceptor(): Interceptor {

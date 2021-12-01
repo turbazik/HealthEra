@@ -1,23 +1,24 @@
 package com.turbazik.healthera.data.repository
 
 import com.turbazik.healthera.data.api.AuthAPI
-import com.turbazik.healthera.data.mapper.LoginEntityMapper
-import com.turbazik.healthera.domain.model.LoginEntity
+import com.turbazik.healthera.data.storage.UserStorage
 import com.turbazik.healthera.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val api: AuthAPI,
-    private val loginEntityMapper: LoginEntityMapper
+    private val userStorage: UserStorage
 ) : AuthRepository, NetworkRepository() {
 
-    override suspend fun login(email: String, password: String): LoginEntity {
+    override suspend fun login(email: String, password: String) {
         val response = request {
             api.login(
                 email = email,
                 password = password
             )
         }
-
-        return loginEntityMapper.map(from = response)
+        userStorage.token = response.data?.first()?.token.orEmpty()
+        userStorage.userId = response.aux?.tokenPayload?.userId.orEmpty()
+        userStorage.name = response.data?.first()?.user?.forename.orEmpty()
+        userStorage.surname = response.data?.first()?.user?.surname.orEmpty()
     }
 }

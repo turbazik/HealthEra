@@ -3,7 +3,6 @@ package com.turbazik.healthera.ui.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turbazik.healthera.domain.usecase.auth.AuthUseCase
-import com.turbazik.healthera.ui.mapper.LoginDvoMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +12,6 @@ import java.lang.Exception
 
 class AuthViewModel(
     private val authUseCase: AuthUseCase,
-    private val loginDvoMapper: LoginDvoMapper
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow<AuthState>(AuthState.Default)
@@ -62,7 +60,7 @@ class AuthViewModel(
     }
 
     private fun loginRequest(email: String, password: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
                 _viewState.emit(
                     AuthState.StartLoading

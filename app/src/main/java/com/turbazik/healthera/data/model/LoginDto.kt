@@ -17,10 +17,17 @@ data class AuxDto(
 
 data class DataDto(
     @SerializedName("token")
-    val token: String?
+    val token: String?,
+    @SerializedName("user")
+    val user: UserDto?
 )
 
 data class TokenPayloadDto(
     @SerializedName("user_id")
     val userId: String?
+)
+
+data class UserDto(
+    val forename: String?,
+    val surname: String?,
 )
