@@ -32,12 +32,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
         initStateObserving()
-        binding.emailInputEditText.setText(
-            "dev@healthera.co.uk"
-        )
-        binding.passwordInputEditText.setText(
-            "Healthera@01"
-        )
     }
 
     private fun initListeners() {
