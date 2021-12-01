@@ -68,11 +68,22 @@ class AuthViewModel(
             }
             try {
                 authUseCase.login(
-                    email = email,
+                    username = email,
                     password = password
                 )
+                withContext(Dispatchers.Main) {
+                    _viewState.emit(
+                        AuthState.LoginSucceeded
+                    )
+                }
             } catch (e: Exception) {
-
+                withContext(Dispatchers.Main) {
+                    _viewState.emit(
+                        AuthState.LoginFailed(
+                            message = e.message.orEmpty()
+                        )
+                    )
+                }
             } finally {
                 withContext(Dispatchers.Main) {
                     _viewState.emit(

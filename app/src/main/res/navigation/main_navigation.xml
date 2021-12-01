@@ -10,6 +10,17 @@
         android:name="com.turbazik.healthera.ui.auth.AuthFragment"
         android:label="@string/auth"
         tools:layout="@layout/fragment_auth">
+
+        <action
+            android:id="@+id/from_auth_to_adherence"
+            app:destination="@+id/adherence"
+            app:popUpTo="@id/auth"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
+    <fragment
+        android:id="@+id/adherence"
+        android:name="com.turbazik.healthera.ui.adherence.AdherenceFragment"
+        tools:layout="@layout/fragment_adherence" />
 </navigation>

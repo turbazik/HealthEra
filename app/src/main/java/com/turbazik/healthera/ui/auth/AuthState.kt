@@ -6,6 +6,6 @@ sealed class AuthState {
     object PasswordValidationFailed : AuthState()
     object StartLoading : AuthState()
     object EndLoading : AuthState()
+    object LoginSucceeded : AuthState()
     class LoginFailed(val message: String) : AuthState()
-    class LoginSucceeded(val message: String) : AuthState()
 }

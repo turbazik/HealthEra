@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder
 import com.turbazik.healthera.data.mapper.AdherenceEntityMapper
 import com.turbazik.healthera.data.repository.AuthRepositoryImpl
 import com.turbazik.healthera.data.repository.PatientsRepositoryImpl
+import com.turbazik.healthera.data.storage.UserStorage
+import com.turbazik.healthera.data.storage.UserStorageImpl
 import com.turbazik.healthera.domain.repository.AuthRepository
 import com.turbazik.healthera.domain.repository.PatientsRepository
 
@@ -12,6 +14,7 @@ import org.koin.dsl.module
 
 val dataModule = module {
     single { provideGson() }
+    single<UserStorage> { UserStorageImpl(context = get()) }
     single<AuthRepository> {
         AuthRepositoryImpl(
             api = get(),
