@@ -7,7 +7,8 @@ data class LoginDto(
     @SerializedName("aux")
     val aux: AuxDto?,
     @SerializedName("data")
-    val data: List<DataDto>?
+    val data: List<DataDto>?,
+    val error: Error?
 )
 
 data class AuxDto(

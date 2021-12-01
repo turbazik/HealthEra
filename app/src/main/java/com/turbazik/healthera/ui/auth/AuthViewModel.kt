@@ -19,6 +19,8 @@ class AuthViewModel(
     val viewState: StateFlow<AuthState> = _viewState
 
     fun onLoginClicked(email: String, password: String) {
+        if (_viewState.value == AuthState.StartLoading) return
+
         val emailValidationResult = getEmailValidationResult(
             email = email
         )

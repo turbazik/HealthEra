@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/drawable/bg_item.xml" value="0.1" />
         <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/layout/fragment_adherence.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/layout/fragment_adherence_detail.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/layout/fragment_auth.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/layout/fragment_login.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/tursy/AndroidStudioProjects/Healthera2/app/src/main/res/layout/item_adherence.xml" value="0.14130434782608695" />
       </map>
     </option>
   </component>

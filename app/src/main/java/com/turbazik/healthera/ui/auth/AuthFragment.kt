@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -51,21 +52,36 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     private fun initStateObserving() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.viewState.collect { feedState ->
-                    when (feedState) {
+                viewModel.viewState.collect { viewState ->
+                    when (viewState) {
                         is AuthState.Default -> {}
-                        is AuthState.EmailValidationFailed -> {}
-                        is AuthState.EndLoading -> {}
-                        is AuthState.LoginFailed -> {}
+                        is AuthState.EmailValidationFailed -> {
+                            showToast(message = getString(R.string.auth_email_validation))
+                        }
+                        is AuthState.EndLoading -> {
+                            binding.progress.isVisible = false
+                        }
+                        is AuthState.LoginFailed -> {
+                            showToast(message = viewState.message)
+                        }
                         is AuthState.LoginSucceeded -> {
                             navigateAdherenceScreen()
                         }
-                        is AuthState.PasswordValidationFailed -> {}
-                        is AuthState.StartLoading -> {}
+                        is AuthState.PasswordValidationFailed -> {
+                            showToast(message = getString(R.string.auth_password_validation))
+                        }
+                        is AuthState.StartLoading -> {
+                            binding.progress.isVisible = true
+                        }
                     }
                 }
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(),
+            message, Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateAdherenceScreen() {

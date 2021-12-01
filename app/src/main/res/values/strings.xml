@@ -4,4 +4,8 @@
     <string name="password">Password</string>
     <string name="login">Log in</string>
     <string name="auth">Auth</string>
+    <string name="auth_password_validation">Password is empty!</string>
+    <string name="auth_email_validation">Email is empty!</string>
+    <string name="adherence_description">%s, %d Tablets.</string>
+    <string name="type_your_notes_here">Type your notes here</string>
 </resources>

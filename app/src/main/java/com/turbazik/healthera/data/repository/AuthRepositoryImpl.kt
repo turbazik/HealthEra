@@ -7,7 +7,7 @@ import com.turbazik.healthera.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val api: AuthAPI,
-        private val userStorage: UserStorage
+    private val userStorage: UserStorage
 ) : AuthRepository, NetworkRepository() {
 
     override suspend fun login(username: String, password: String) {
@@ -18,6 +18,9 @@ class AuthRepositoryImpl(
             api.login(
                 body = requestBody
             )
+        }
+        if (response.error != null) {
+            throw Exception(response.error.text)
         }
         saveUserData(response)
     }

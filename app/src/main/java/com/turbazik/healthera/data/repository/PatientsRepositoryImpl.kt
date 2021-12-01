@@ -22,6 +22,9 @@ class PatientsRepositoryImpl(
                 endTime = endTime
             )
         }
+        if (adherenceResponse.error != null) {
+            throw Exception(adherenceResponse.error.text)
+        }
         for (adherence in adherenceResponse.data.orEmpty()) {
             var remedyResponse: RemedyItemDto? = null
             adherence.remedyId?.let {

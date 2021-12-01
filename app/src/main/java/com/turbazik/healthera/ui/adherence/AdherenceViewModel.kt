@@ -10,7 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
-import java.util.Calendar
+
+private const val START_TIME = 1630001113
+private const val END_TIME = 1638381113
 
 class AdherenceViewModel(
     private val patientsUseCase: PatientsUseCase,
@@ -34,8 +36,8 @@ class AdherenceViewModel(
             }
             try {
                 val response = patientsUseCase.getAdherence(
-                    startTime = 0,
-                    endTime = Calendar.getInstance().time.time.toInt()
+                    startTime = START_TIME,
+                    endTime = END_TIME
                 )
                 withContext(Dispatchers.Main) {
                     _viewState.emit(

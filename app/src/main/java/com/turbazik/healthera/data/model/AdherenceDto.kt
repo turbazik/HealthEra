@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class AdherenceDto(
     @SerializedName("data")
-    val data: List<AdherenceItemDto>?
+    val data: List<AdherenceItemDto>?,
+    val error: Error?
 )
 
 data class AdherenceItemDto(

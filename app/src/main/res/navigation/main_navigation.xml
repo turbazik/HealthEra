@@ -22,5 +22,22 @@
     <fragment
         android:id="@+id/adherence"
         android:name="com.turbazik.healthera.ui.adherence.AdherenceFragment"
-        tools:layout="@layout/fragment_adherence" />
+        tools:layout="@layout/fragment_adherence">
+
+        <action
+            android:id="@+id/from_adherence_to_detail"
+            app:destination="@+id/adherenceDetail" />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/adherenceDetail"
+        android:name="com.turbazik.healthera.ui.adherence.AdherenceDetailFragment"
+        tools:layout="@layout/fragment_adherence_detail">
+
+        <argument
+            android:name="adherence"
+            app:argType="com.turbazik.healthera.ui.model.AdherenceDvo" />
+
+    </dialog>
 </navigation>
